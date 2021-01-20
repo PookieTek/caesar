@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import sys
+import os
 import re
 import string
 
@@ -43,6 +44,9 @@ def xorDetect(byteArray):
 def main():
     argsValidation()
     file = open(sys.argv[1], "r")
+    if os.stat(sys.argv[1]).st_size == 0:
+        sys.stderr.write("Error: File is empty")
+        exit(84)
     fileContent = file.readlines()
     for line in fileContent:
         hexValidation(line)
