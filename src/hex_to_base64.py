@@ -31,7 +31,7 @@ def main():
     if len(read) % 2 != 0 or len(read) == 0:
         sys.stderr.write("Error: Hexadecimal value is invalid")
         exit(84)
-    base64 = codecs.encode(codecs.decode(read, "hex"), "base64").decode().replace('\n', '')
+    base64 = codecs.encode(codecs.decode(read, "hex"), "base64").decode()
     file.close()
     sys.stdout.write(base64)
     exit(0)

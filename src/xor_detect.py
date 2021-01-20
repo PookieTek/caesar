@@ -39,7 +39,7 @@ def xorDetect(byteArray):
     keyValue = bytes([keyValue]).hex()
     line = str(line + 1)
     string = (line + " " + keyValue)
-    sys.stdout.write(string.upper())
+    sys.stdout.write(string.upper() + '\n')
 
 def main():
     argsValidation()

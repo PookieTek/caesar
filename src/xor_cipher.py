@@ -36,7 +36,7 @@ def keyValue(byteArray):
         sum(characterFrequencies[count] for count in map(lambda count:
             chr(count ^ byte), byteArray) if count in characterFrequencies))
     string = bytes([keyValue]).hex()
-    sys.stdout.write(string.upper())
+    sys.stdout.write(string.upper() + '\n')
 
 def main():
     argsValidation()
