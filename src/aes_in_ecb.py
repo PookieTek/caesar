@@ -3,6 +3,8 @@
 import sys
 import codecs
 import string
+import base64
+from Crypto.Cipher import AES
 
 def fileValidation(file):
     try:
@@ -30,14 +32,26 @@ def un_padder(data, byte):
         if data[i] == byte:
             return (data[:i])
 
+
+def unpad(s):
+    return s[:-ord(s[len(s)-1:])]
+
+
 def main():
     argsValidation()
     file = open(sys.argv[1], "r")
-    read = file.read()
-    read = read.replace('\n', '')
-    byte = padder(bytearray("Rijndael", 'utf-8'), 10, 0x02)
-    print(byte)
-    print(un_padder(byte, 0x02))
+    Lines = file.readlines()
+    if len(Lines) != 2 or len((Lines[0])[:-1]) % 16 != 0:
+        exit(84)
+    hex_key = bytes.fromhex((Lines[0])[:-1])
+    key = hex_key.decode("ASCII")
+    cipher = AES.new(key, AES.MODE_ECB)
+    to_decrypt = base64.b64decode((Lines[1])[:-1])
+    to_decrypt = cipher.decrypt(to_decrypt)
+    to_decrypt = unpad(to_decrypt)
+    to_decrypt = base64.b64encode(to_decrypt)
+    sys.stdout.write(to_decrypt.decode() + '\n')
+    ##print(base64.b64encode(to_decrypt))
     exit(0)
 
 
