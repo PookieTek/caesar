@@ -18,7 +18,7 @@ def fileValidation(file):
         return False
 
 def argsValidation():
-    if len(sys.argv) != 2 or fileValidation(sys.argv[1]) == False:
+    if len(sys.argv) != 2 or fileValidation(sys.argv[1]) is False:
         sys.stderr.write("Error: Invalid File or Arguments")
         exit(84)
 
