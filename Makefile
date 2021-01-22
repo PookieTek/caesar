@@ -12,6 +12,7 @@ all:
 	cp src/xor_detect.py challenge04
 	cp src/xor_repeating.py challenge05
 	cp src/xor_break_repeating.py challenge06
+	cp src/aes_in_ecb.py challenge07
 
 clean: fclean
 
@@ -22,6 +23,7 @@ fclean:
 	rm challenge04
 	rm challenge05
 	rm challenge06
+	rm challenge07
 
 re: fclean all
 
