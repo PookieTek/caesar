@@ -14,6 +14,7 @@ all:
 	cp src/xor_break_repeating.py challenge06
 	cp src/aes_in_ecb.py challenge07
 	cp src/detect_aes_in_ecb.py challenge08
+	cp src/cbc.py challenge09
 
 clean: fclean
 
@@ -26,6 +27,7 @@ fclean:
 	rm challenge06
 	rm challenge07
 	rm challenge08
+	rm challenge09
 
 re: fclean all
 
