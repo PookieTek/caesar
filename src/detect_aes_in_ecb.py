@@ -34,6 +34,8 @@ def main():
     argsValidation()
     file = open(sys.argv[1], "r")
     Lines = file.readlines()
+    if (len(Lines) == 0):
+        exit(84)
     for i in range(0, len(Lines)):
         Lines[i] = base64.b64decode((Lines[i])[:-1])
         if len(Lines[i]) % 16 != 0:
