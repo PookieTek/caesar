@@ -11,13 +11,6 @@ def check_hexa(value):
             return False
     return True
 
-def check_file(file):
-    try:
-        open(file, "r")
-        return True
-    except IOError:
-        return False
-
 def fileValidation(file):
     try:
         open(file, "r")

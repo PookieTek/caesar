@@ -36,6 +36,8 @@ def main():
     Lines = file.readlines()
     for i in range(0, len(Lines)):
         Lines[i] = base64.b64decode((Lines[i])[:-1])
+        if len(Lines[i]) % 16 != 0:
+            exit(84)
     repetitions = [count_repetition(cipher, 16) for cipher in Lines]
     most_repetitions = sorted(repetitions, key=lambda x: x['repetitions'], reverse=True)[0]
     for i in range(0, len(Lines)):
