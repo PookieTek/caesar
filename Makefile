@@ -15,6 +15,7 @@ all:
 	cp src/aes_in_ecb.py challenge07
 	cp src/detect_aes_in_ecb.py challenge08
 	cp src/cbc.py challenge09
+	cp src/ecb_decryption.py challenge10
 
 clean: fclean
 
@@ -28,6 +29,7 @@ fclean:
 	rm challenge07
 	rm challenge08
 	rm challenge09
+	rm challenge10
 
 re: fclean all
 
