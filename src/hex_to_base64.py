@@ -3,6 +3,7 @@
 import sys
 import codecs
 import string
+import base64
 
 def hexValidation(hexstring):
     for i in hexstring:
@@ -28,12 +29,14 @@ def main():
     read = file.read()
     read = read.replace('\n', '')
     hexValidation(read)
+    file.close()
     if len(read) % 2 != 0 or len(read) == 0:
         sys.stderr.write("Error: Hexadecimal value is invalid")
         exit(84)
-    base64 = codecs.encode(codecs.decode(read, "hex"), "base64").decode()
-    file.close()
-    sys.stdout.write(base64)
+    hex = codecs.decode(read, "hex")
+    base64converted = base64.b64encode(hex).decode()
+    #base64 = codecs.encode(codecs.decode(read, "hex"), "base64").decode()
+    sys.stdout.write(base64converted + '\n')
     exit(0)
 
 if __name__ == "__main__":
