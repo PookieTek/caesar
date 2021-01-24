@@ -4,6 +4,8 @@ import sys
 import os
 import re
 import string
+import itertools
+import codecs
 
 def hexValidation(hexstring):
     for i in hexstring:
@@ -24,12 +26,14 @@ def argsValidation():
         exit(84)
 
 def xorRepeating(message, key):
-    index, output = 0, b''
-    for byte in message:
-        output += bytearray([int(byte, 16) ^ int(key[index], 16)])
-        index += (index < len(key) - 1) if 1 else 0
-    string = output.hex().replace('00', 'O').replace('01', '1').replace('02', '2').replace('03', '3').replace('04', '4').replace('05', '5').replace('06', '6').replace('07', '7').replace('08', '8').replace('09', '9').replace('0a', 'a').replace('0b', 'b').replace('0c', 'c').replace('0d', 'd').replace('0e', 'e').replace('0f', 'f').replace('O', '0')
-    sys.stdout.write(string.upper() + '\n')
+    #index, output = 0, b''
+    #for byte in message:
+    #    output += bytearray([int(byte, 16) ^ int(key[index], 16)])
+    #    index += (index < len(key) - 1) if 1 else 0
+    #string = output.hex().replace('00', 'O').replace('01', '1').replace('02', '2').replace('03', '3').replace('04', '4').replace('05', '5').replace('06', '6').replace('07', '7').replace('08', '8').replace('09', '9').replace('0a', 'a').replace('0b', 'b').replace('0c', 'c').replace('0d', 'd').replace('0e', 'e').replace('0f', 'f').replace('O', '0')
+    
+    string = bytearray(messageChr ^ keyChrCycle for messageChr, keyChrCycle in zip(message, itertools.cycle(key)))
+    sys.stdout.write(string.hex().upper() + '\n')
 
 def main():
     argsValidation()
@@ -47,7 +51,7 @@ def main():
     except IndexError:
         sys.stderr.write('Error: Message doesn\'t exist')
         exit(84)
-    xorRepeating(message, key)
+    xorRepeating(codecs.decode(message, "hex"), codecs.decode(key, "hex"))
     exit(0)
 
 if __name__ == "__main__":
